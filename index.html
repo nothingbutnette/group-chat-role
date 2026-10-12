@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" data-pal="pink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's Your Group Chat Role?</title>
+<meta name="description" content="10 questions. About 60 seconds. Find out if you're the Planner, the Lurker, the Voice Memo Sender, or worse.">
+<meta name="theme-color" content="#FF4F9A">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://nothingbutnette.github.io/group-chat-role/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutnette.github.io/group-chat-role/">
+<meta property="og:title" content="What's your group chat role?">
+<meta property="og:description" content="10 questions. 60 seconds. Zero accountability. Send it to the chat and see who's who.">
+<meta property="og:image" content="https://nothingbutnette.github.io/group-chat-role/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hot pink card reading: What's your group chat role?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What's your group chat role?">
+<meta name="twitter:description" content="10 questions. 60 seconds. Zero accountability.">
+<meta name="twitter:image" content="https://nothingbutnette.github.io/group-chat-role/og.png">
+<link rel="preload" href="fonts/bagel-fat-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Bagel Fat One";font-weight:400;font-display:swap;src:url(fonts/bagel-fat-one-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-weight:400;font-display:swap;src:url(fonts/figtree-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-weight:500;font-display:swap;src:url(fonts/figtree-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-weight:600;font-display:swap;src:url(fonts/figtree-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-weight:700;font-display:swap;src:url(fonts/figtree-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-weight:800;font-display:swap;src:url(fonts/figtree-latin-800-normal.woff2) format("woff2")}
+html,body{margin:0}
+body{padding-top:max(18px,env(safe-area-inset-top));-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: one phone-width column on a loud color; questions arrive as incoming bubbles, answers are quick-reply bubbles, the result is a 9:16 story card. Each palette is a deliberate single look, chosen by the viewer. */
+:root{
+  --bg:#FF4F9A; --ink:#1B0F17; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#1B0F17;
+  --soft:#FFD3E6; --hi:#FFE14D; --hi-ink:#1B0F17; --card:#1B0F17; --card-ink:#FFFFFF; --accent:#FF4F9A; --kicker:#FFE14D; --muted:#6B4A5C;
+  --display:"Bagel Fat One","Arial Black",Impact,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+html[data-pal="bubble"]{--bg:#3D7BFF; --ink:#0A1633; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#0A1633; --soft:#D8E5FF; --hi:#D4F53C; --hi-ink:#0A1633; --card:#0A1633; --card-ink:#FFFFFF; --accent:#7DA6FF; --kicker:#D4F53C; --muted:#3A4A6B}
+html[data-pal="lime"]{--bg:#C9F53B; --ink:#15200A; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#15200A; --soft:#EEFCC0; --hi:#FF7B47; --hi-ink:#15200A; --card:#15200A; --card-ink:#FFFFFF; --accent:#C9F53B; --kicker:#FF9466; --muted:#4A5A33}
+html[data-pal="grape"]{--bg:#A68BFF; --ink:#170B36; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#170B36; --soft:#E7DEFF; --hi:#FFB8E1; --hi-ink:#170B36; --card:#170B36; --card-ink:#FFFFFF; --accent:#B9A3FF; --kicker:#FFB8E1; --muted:#4B3B78}
+html[data-pal="tangerine"]{--bg:#FF8133; --ink:#2B1000; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#2B1000; --soft:#FFE1CC; --hi:#FFE14D; --hi-ink:#2B1000; --card:#2B1000; --card-ink:#FFFFFF; --accent:#FF8133; --kicker:#FFE14D; --muted:#6B3A1A}
+html[data-pal="mint"]{--bg:#7EE0C3; --ink:#06281F; --on-ink:#FFFFFF; --bubble:#FFFFFF; --bubble-ink:#06281F; --soft:#D3F6EA; --hi:#FF6F91; --hi-ink:#06281F; --card:#06281F; --card-ink:#FFFFFF; --accent:#7EE0C3; --kicker:#FF8FA9; --muted:#2E5A4C}
+html[data-pal="midnight"]{--bg:#141019; --ink:#F6F0FF; --on-ink:#141019; --bubble:#2A2433; --bubble-ink:#F6F0FF; --soft:#352D40; --hi:#FF4F9A; --hi-ink:#141019; --card:#FF4F9A; --card-ink:#141019; --accent:#141019; --kicker:#141019; --muted:#B7A9C9; color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--bg);transition:background .25s}
+body{background:var(--bg);color:var(--ink);font:500 1rem/1.45 var(--body);padding-inline:16px;padding-block:18px 40px;min-height:100%;transition:background .25s,color .25s}
+.wrap{max-width:430px;margin:0 auto}
+.brand{display:flex;justify-content:space-between;align-items:center;font:800 .78rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.brand span:last-child{opacity:.7}
+.pals{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pals span{font:800 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase;margin-right:2px}
+.sw{width:30px;height:30px;border-radius:50%;border:3px solid var(--bubble);cursor:pointer;padding:0;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink)}
+.palname{font:700 .8rem var(--body);opacity:.8}
+h1{font:400 clamp(2.6rem,13vw,3.6rem)/.95 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+.bubble{max-width:85%;padding:11px 15px;border-radius:20px;font-size:1.02rem;line-height:1.35}
+.in{background:var(--bubble);color:var(--bubble-ink);border-bottom-left-radius:6px;align-self:flex-start}
+.out{background:var(--hi);color:var(--hi-ink);border-bottom-right-radius:6px;align-self:flex-end}
+.thread{display:flex;flex-direction:column;gap:8px;margin:22px 0}
+.sender{font:700 .72rem var(--body);color:var(--ink);opacity:.7;margin:6px 0 -4px 6px}
+.typing{display:inline-flex;gap:4px;align-items:center;padding:13px 16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.btn{font:800 1.05rem var(--body);border:3px solid var(--ink);background:var(--ink);color:var(--on-ink);padding:14px 22px;border-radius:999px;cursor:pointer;width:100%}
+.btn.alt{background:var(--bubble);color:var(--bubble-ink)}
+.btn.small{font-size:.92rem;padding:11px 16px}
+.btn:focus-visible,.reply:focus-visible,.sw:focus-visible{outline:3px solid var(--bubble);outline-offset:3px}
+.sub{font-weight:600;margin:14px 0 0}
+.stack{display:grid;gap:10px}
+.qtop{display:flex;justify-content:space-between;align-items:center;font:800 .82rem var(--body)}
+.dots{display:flex;gap:5px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--ink);opacity:.25}.dots i.on{opacity:1}
+.qbubble{font-size:1.18rem;font-weight:700}
+.replies{display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-top:6px}
+.reply{font:600 1rem/1.3 var(--body);text-align:left;color:var(--bubble-ink);background:var(--soft);border:2px solid transparent;border-radius:20px;border-bottom-right-radius:6px;padding:11px 15px;max-width:88%;cursor:pointer;transition:transform .12s,background .12s}
+.reply:hover{border-color:var(--ink)}
+.reply.picked{background:var(--hi);color:var(--hi-ink);transform:scale(1.03)}
+.label{font:700 .7rem var(--body);letter-spacing:.1em;text-transform:uppercase;opacity:.75;align-self:flex-end;margin-top:6px}
+.card{aspect-ratio:9/16;max-width:100%;width:100%;max-height:78vh;margin:12px auto 0;background:var(--card);color:var(--card-ink);border-radius:26px;padding:26px 22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;transition:background .25s}
+.card .kicker{font:800 .74rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--kicker)}
+.card .role{font:400 clamp(2.3rem,12vw,3.3rem)/.95 var(--display);color:var(--accent);margin-top:10px;text-wrap:balance}
+.card .cbubble{background:#FFFFFF;color:#1B0F17;border-radius:20px;border-bottom-left-radius:6px;padding:12px 15px;font-weight:700;font-size:1.02rem;max-width:92%}
+.card .reply-mini{align-self:flex-end;background:var(--hi);color:var(--hi-ink);border-radius:20px;border-bottom-right-radius:6px;padding:9px 14px;font-weight:700;font-size:.92rem;margin-top:8px}
+html[data-pal="midnight"] .card .reply-mini{background:#141019;color:#FFFFFF}
+.card .cfoot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;font:700 .82rem var(--body)}
+.card .cfoot b{font:400 1.25rem var(--display);color:var(--kicker);display:block}
+.blob{position:absolute;right:-60px;top:38%;width:180px;height:180px;border-radius:50%;background:var(--accent);opacity:.18;z-index:0}
+.card > :not(.blob){position:relative;z-index:1}
+.panel{background:var(--bubble);color:var(--bubble-ink);border-radius:22px;padding:18px;margin-top:14px}
+.panel h2{font:400 1.35rem var(--display);margin:0 0 6px}
+.panel p{margin:0}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.pair div{background:var(--soft);border-radius:16px;padding:12px;min-width:0}
+.pair small{font:800 .68rem var(--body);letter-spacing:.1em;text-transform:uppercase;opacity:.7;display:block}
+.pair b{font-weight:800}
+.note{font-size:.86rem;font-weight:600;margin-top:8px;min-height:1.2em}
+.hint{text-align:center;font-weight:700;margin-top:10px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand"><span>Group Chat Role</span><span>60-second quiz</span></div>
+  <div class="pals" role="group" aria-label="Color"><span>Vibe</span><span id="swatches" style="display:flex;gap:8px;margin:0"></span><span class="palname" id="palName"></span></div>
+
+  <!-- intro -->
+  <section id="intro">
+    <div class="thread" aria-hidden="true">
+      <div class="sender">bestie</div>
+      <div class="bubble in">ok who planned this dinner</div>
+      <div class="bubble in">and who is going to be 40 min late</div>
+      <div class="bubble out">not me 🙃</div>
+      <div class="bubble in typing"><i></i><i></i><i></i></div>
+    </div>
+    <h1>What's your group chat role?</h1>
+    <p class="sub">10 questions. About 60 seconds. Zero accountability.</p>
+    <div class="stack" style="margin-top:22px">
+      <button class="btn" id="startBtn" type="button">Find out</button>
+    </div>
+    <div class="panel" id="sharedFrom" hidden>
+      <p><b id="sharedName"></b></p>
+    </div>
+  </section>
+
+  <!-- quiz -->
+  <section id="quiz" hidden>
+    <div class="qtop" style="margin-top:14px"><span id="qnum">1/10</span><span class="dots" id="dots"></span></div>
+    <div class="thread">
+      <div class="sender">the group chat</div>
+      <div class="bubble in qbubble" id="qtext"></div>
+      <div class="label">Pick a reply</div>
+      <div class="replies" id="replies"></div>
+    </div>
+    <button class="btn alt small" id="backBtn" type="button" style="width:auto">Back</button>
+  </section>
+
+  <!-- result -->
+  <section id="result" hidden>
+    <div class="card" id="card">
+      <div class="blob" aria-hidden="true"></div>
+      <div>
+        <div class="kicker" id="cKicker">My group chat role</div>
+        <div class="role" id="cRole"></div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div class="cbubble" id="cTag"></div>
+        <div class="reply-mini">this is so me</div>
+      </div>
+      <div class="cfoot"><span>What's yours?<b>Take the quiz</b></span><span id="cRare"></span></div>
+    </div>
+    <div class="stack" style="margin-top:14px">
+      <button class="btn" id="saveBtn" type="button">Save my card</button>
+    </div>
+    <p class="hint" id="saveNote">Sized for your story.</p>
+
+    <div class="panel">
+      <h2>The full read</h2>
+      <p id="rDesc"></p>
+      <p style="margin-top:10px" id="rAlso"></p>
+      <div class="pair">
+        <div><small>Best duo</small><b id="rDuo"></b></div>
+        <div><small>Will fight with</small><b id="rFoe"></b></div>
+      </div>
+    </div>
+
+    <div class="stack" style="margin-top:14px">
+      <button class="btn alt" id="groupBtn" type="button">Copy a message for the group chat</button>
+      <button class="btn alt" id="linkBtn" type="button">Copy link to my result</button>
+      <button class="btn alt" id="retakeBtn" type="button">Retake</button>
+    </div>
+    <p class="note" id="copyNote" aria-live="polite"></p>
+  </section>
+</div>
+
+<script>
+const T = {
+  planner:{name:"The Planner", tag:"Sends the calendar invite before anyone agrees to the plan.",
+    desc:"Without you, this group would have said \"we should hang out!\" for six years straight. You make the polls. You confirm the reservation. You are tired.", duo:"hype", foe:"wwh"},
+  lurker:{name:"The Lurker", tag:"Has read every message since 2019. Has sent four.",
+    desc:"You know everything and say nothing. When you finally type, the whole chat goes quiet out of respect.", duo:"chaos", foe:"voicememo"},
+  voicememo:{name:"The Voice Memo Sender", tag:"Could've been a text. Is instead a six-minute podcast.",
+    desc:"Your memos start with \"okay so\" and end somewhere completely different. Nobody's mad. Your voice is a comfort.", duo:"therapist", foe:"lurker"},
+  meme:{name:"The 2am Meme Dispatcher", tag:"Hasn't typed a full sentence since 2021. Fluent anyway.",
+    desc:"You speak in reaction pics and you never miss. The chat would be 40% quieter and 90% less funny without you.", duo:"chaos", foe:"planner"},
+  hype:{name:"The Hype Machine", tag:"Has typed STUNNING in all caps 400 times. Meant it every time.",
+    desc:"You're the reason anyone posts a selfie at all. Every win, big or tiny, gets a parade.", duo:"planner", foe:"ghost"},
+  wwh:{name:"The “Wait, What Happened?”", tag:"Shows up 200 messages late and asks for a recap.",
+    desc:"You live your life and check the chat on Sundays. Somehow you're still everyone's favorite person to tell the story to.", duo:"archivist", foe:"planner"},
+  therapist:{name:"The Group Therapist", tag:"Unlicensed. Undefeated.",
+    desc:"People bring you their situationships at midnight and leave with a plan. You give advice you would never take yourself.", duo:"voicememo", foe:"chaos"},
+  chaos:{name:"The Chaos Agent", tag:"Asked one question. Now there are three side chats.",
+    desc:"You drop a hot take, log off, and come back to 300 messages. The chat would be calmer without you, and much worse.", duo:"meme", foe:"therapist"},
+  ghost:{name:"The Read Receipt Ghost", tag:"Seen three days ago. Still thinking about the reply.",
+    desc:"You love everyone in this chat. You just reply to texts the way some people return library books. When you do show up, it's an event.", duo:"wwh", foe:"hype"},
+  archivist:{name:"The Screenshot Archivist", tag:"Has receipts back to 2017. Uses them for good. Mostly.",
+    desc:"You remember who said what, with photographic evidence. Every birthday post you make is a historical document.", duo:"wwh", foe:"chaos"}
+};
+const KEYS = Object.keys(T);
+const Q = [
+  {q:"Someone drops a 40-second video with zero context. You…", a:[["Reply with a funnier one","meme"],["Watch it three times. Say nothing.","lurker"],["Send a voice memo reacting to it","voicememo"],["Screenshot the best frame for later","archivist"]]},
+  {q:"The chat is planning a birthday dinner. You…", a:[["Already made the reservation and a poll","planner"],["\"I'm down for whatever!!\" and mean it","hype"],["Show up three days later: wait, what dinner?","wwh"],["Suggest a different city instead","chaos"]]},
+  {q:"A friend sends a long message about their situationship.", a:[["Reply with three thoughtful paragraphs","therapist"],["HE DOES NOT DESERVE YOU","hype"],["Read it, mean to reply, never do","ghost"],["Screenshot it. For evidence.","archivist"]]},
+  {q:"Your unread count when you open the chat:", a:[["0. I read everything live.","planner"],["47. I'll scroll up eventually.","wwh"],["200+. Muted it in March.","ghost"],["0, but I've never said a word","lurker"]]},
+  {q:"Your go-to way to respond:", a:[["Voice memo, obviously","voicememo"],["A GIF or a meme","meme"],["A heart react and nothing else","lurker"],["A full paragraph","therapist"]]},
+  {q:"It's 2am. You're…", a:[["Sending memes to people who are asleep","meme"],["Starting a debate about whether a hot dog is a sandwich","chaos"],["Giving someone advice about their ex","therapist"],["Asleep. I have a 7am alarm.","planner"]]},
+  {q:"Someone posts a selfie.", a:[["BEAUTIFUL. STUNNING. ICONIC.","hype"],["Saved to my camera roll for their birthday post","archivist"],["Where are you, who's that, why wasn't I invited","wwh"],["Love it silently","lurker"]]},
+  {q:"Two friends start arguing in the chat.", a:[["Mediate. Calmly.","therapist"],["Grab popcorn. Say nothing.","lurker"],["Screenshot it for the side chat","archivist"],["Make it worse, lovingly","chaos"]]},
+  {q:"When someone has big news, you hear it…", a:[["First, and I'm already celebrating","hype"],["Last: wait, what happened??","wwh"],["In a seven-minute voice memo from me","voicememo"],["Never. My notifications are off.","ghost"]]},
+  {q:"Your role at the actual hangout:", a:[["I made the itinerary","planner"],["The energy. I am the energy.","hype"],["Recording a voice memo for whoever couldn't come","voicememo"],["Suggested a \"quick\" second location","chaos"]]}
+];
+// max possible picks per type, to normalize
+const MAX = {}; KEYS.forEach(k=>MAX[k]=0); Q.forEach(x=>{const seen=new Set(); x.a.forEach(([,k])=>{if(!seen.has(k)){MAX[k]++;seen.add(k)}})});
+
+const $ = id=>document.getElementById(id);
+let ans = new Array(Q.length).fill(null), i = 0, busy = false;
+function view(id){["intro","quiz","result"].forEach(s=>$(s).hidden=s!==id); window.scrollTo(0,0)}
+
+function renderQ(){
+  const x = Q[i];
+  $("qnum").textContent = `${i+1}/${Q.length}`;
+  $("dots").innerHTML = Q.map((_,j)=>`<i class="${j<=i?"on":""}"></i>`).join("");
+  $("qtext").textContent = x.q;
+  $("replies").innerHTML = x.a.map(([t],j)=>`<button type="button" class="reply${ans[i]===j?" picked":""}" id="r${j}">${t}</button>`).join("");
+  x.a.forEach((_,j)=>$("r"+j).onclick=()=>pick(j));
+  $("backBtn").style.visibility = i===0 ? "hidden" : "visible";
+  busy = false;
+}
+function pick(j){
+  if(busy) return; busy = true;
+  ans[i] = j; $("r"+j).classList.add("picked");
+  setTimeout(()=>{ if(i<Q.length-1){i++; renderQ()} else finish() }, 260);
+}
+function finish(){
+  const s={}; KEYS.forEach(k=>s[k]=0);
+  ans.forEach((j,qi)=>{ if(j!=null) s[Q[qi].a[j][1]]++ });
+  const ranked = KEYS.slice().sort((a,b)=> (s[b]/MAX[b]) - (s[a]/MAX[a]) || s[b]-s[a]);
+  show(ranked[0], ranked[1], true);
+  try{ history.replaceState(null,"","#"+ranked[0]+"-"+pal) }catch(e){}
+}
+function show(k, second, mine){
+  const r = T[k]; roleKey = k;
+  $("cRole").textContent = r.name;
+  $("cTag").textContent = r.tag;
+  $("cKicker").textContent = mine ? "My group chat role" : "Their group chat role";
+  $("cRare").textContent = "";
+  $("rDesc").textContent = r.desc;
+  $("rAlso").innerHTML = second ? `With a little bit of <b>${T[second].name}</b> energy.` : "";
+  $("rDuo").textContent = T[r.duo].name;
+  $("rFoe").textContent = T[r.foe].name;
+  $("groupBtn").hidden = !mine; $("linkBtn").hidden = !mine; $("saveBtn").hidden = !mine;
+  $("saveNote").textContent = mine ? "Sized for your story." : "";
+  $("retakeBtn").textContent = mine ? "Retake" : "Find out yours";
+  $("copyNote").textContent = "";
+  view("result");
+}
+const PALS = [["pink","Hot Pink","#FF4F9A"],["bubble","Blue Bubble","#3D7BFF"],["lime","Lime Soda","#C9F53B"],["grape","Grape Jelly","#A68BFF"],["tangerine","Tangerine","#FF8133"],["mint","Mint Condition","#7EE0C3"],["midnight","2am","#141019"]];
+let pal = "pink"; let roleKey = "";
+try{ const s=localStorage.getItem("gcr-pal"); if(PALS.some(p=>p[0]===s)) pal=s }catch(e){}
+function setPal(p){
+  pal=p; document.documentElement.setAttribute("data-pal",p);
+  try{localStorage.setItem("gcr-pal",p)}catch(e){}
+  $("swatches").innerHTML = PALS.map(([k,n,c])=>`<button type="button" class="sw" id="sw-${k}" style="background:${c}" aria-label="${n}" aria-pressed="${k===p}"></button>`).join("");
+  PALS.forEach(([k])=>$("sw-"+k).onclick=()=>setPal(k));
+  $("palName").textContent = PALS.find(x=>x[0]===p)[1];
+  if(roleKey && !$("result").hidden){ try{history.replaceState(null,"","#"+roleKey+"-"+pal)}catch(e){} }
+}
+function link(){ return location.href.split("#")[0] + "#" + roleKey + "-" + pal }
+function copy(text, ok){
+  const done=()=>$("copyNote").textContent=ok, fail=()=>$("copyNote").textContent=text;
+  try{ navigator.clipboard.writeText(text).then(done,fail) }catch(e){ fail() }
+}
+$("groupBtn").onclick=()=>{
+  const n=T[roleKey]?T[roleKey].name:"";
+  copy(`Apparently I'm ${n} in this chat. Take it and let's see who's who: ${link()}`, "Copied. Paste it in the group chat.");
+};
+$("linkBtn").onclick=()=>copy(link(),"Link copied.");
+/* ---------- save card as image ---------- */
+function rr(ctx,x,y,w,h,r){
+  r = typeof r==="number" ? [r,r,r,r] : r; // tl,tr,br,bl
+  ctx.beginPath(); ctx.moveTo(x+r[0],y); ctx.lineTo(x+w-r[1],y); ctx.quadraticCurveTo(x+w,y,x+w,y+r[1]);
+  ctx.lineTo(x+w,y+h-r[2]); ctx.quadraticCurveTo(x+w,y+h,x+w-r[2],y+h); ctx.lineTo(x+r[3],y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r[3]); ctx.lineTo(x,y+r[0]); ctx.quadraticCurveTo(x,y,x+r[0],y); ctx.closePath();
+}
+function wrap(ctx,text,maxW){
+  const words=text.split(" "), lines=[]; let line="";
+  for(const w of words){ const t=line?line+" "+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line); line=w} else line=t }
+  if(line) lines.push(line); return lines;
+}
+async function makeCard(){
+  try{ await Promise.all([document.fonts.load('400 120px "Bagel Fat One"'),document.fonts.load('800 40px Figtree'),document.fonts.load('700 40px Figtree')]) }catch(e){}
+  const cs=getComputedStyle(document.documentElement), v=n=>cs.getPropertyValue(n).trim();
+  const W=1080,H=1920,c=document.createElement("canvas"); c.width=W; c.height=H; const x=c.getContext("2d");
+  const r=T[roleKey], mid=pal==="midnight";
+  x.fillStyle=v("--bg"); x.fillRect(0,0,W,H);
+  const cx=70,cy=150,cw=W-140,ch=H-300;
+  rr(x,cx,cy,cw,ch,72); x.fillStyle=v("--card"); x.fill();
+  x.save(); rr(x,cx,cy,cw,ch,72); x.clip();
+  x.globalAlpha=.18; x.fillStyle=v("--accent"); x.beginPath(); x.arc(cx+cw+40,cy+ch*.42,300,0,Math.PI*2); x.fill(); x.globalAlpha=1; x.restore();
+  const px=cx+80, inner=cw-160;
+  x.textBaseline="alphabetic";
+  if("letterSpacing" in x) x.letterSpacing="6px";
+  x.fillStyle=v("--kicker"); x.font='800 36px Figtree,system-ui,sans-serif'; x.fillText("MY GROUP CHAT ROLE",px,cy+150);
+  if("letterSpacing" in x) x.letterSpacing="0px";
+  let size=150; x.font=`400 ${size}px "Bagel Fat One",Impact,sans-serif`; let rl=wrap(x,r.name,inner);
+  while(rl.length>4 && size>90){ size-=10; x.font=`400 ${size}px "Bagel Fat One",Impact,sans-serif`; rl=wrap(x,r.name,inner) }
+  x.fillStyle=v("--accent"); rl.forEach((l,i)=>x.fillText(l,px,cy+170+size*.95*(i+1)));
+  // tag bubble
+  x.font='700 48px Figtree,system-ui,sans-serif'; const tl=wrap(x,r.tag,inner-110);
+  const lh=60, bh=tl.length*lh+64, bw=Math.min(inner-20,Math.max(...tl.map(l=>x.measureText(l).width))+80);
+  const titleBottom=cy+170+size*.95*rl.length+size*.25, footTop=cy+ch-240;
+  const by=Math.round(titleBottom+(footTop-titleBottom-(bh+22+86))/2);
+  rr(x,px,by,bw,bh,[48,48,48,14]); x.fillStyle="#FFFFFF"; x.fill();
+  x.fillStyle="#1B0F17"; tl.forEach((l,i)=>x.fillText(l,px+40,by+32+lh*(i+1)-14));
+  // reply
+  x.font='700 42px Figtree,system-ui,sans-serif'; const rt="this is so me", rw=x.measureText(rt).width+70, rh=86;
+  const rx=cx+cw-80-rw, ry=by+bh+22;
+  rr(x,rx,ry,rw,rh,[44,44,14,44]); x.fillStyle=mid?"#141019":v("--hi"); x.fill();
+  x.fillStyle=mid?"#FFFFFF":v("--hi-ink"); x.fillText(rt,rx+35,ry+57);
+  // footer
+  x.fillStyle=v("--card-ink"); x.font='700 38px Figtree,system-ui,sans-serif'; x.fillText("What's yours?",px,cy+ch-170);
+  x.fillStyle=v("--kicker"); x.font='400 72px "Bagel Fat One",Impact,sans-serif'; x.fillText("Take the quiz",px,cy+ch-90);
+  x.fillStyle=v("--ink"); x.font='800 34px Figtree,system-ui,sans-serif'; x.textAlign="center";
+  x.fillText(location.host+location.pathname.replace(/\/$/,""),W/2,H-62);
+  return new Promise(res=>c.toBlob(res,"image/png"));
+}
+$("saveBtn").onclick=async()=>{
+  const b=$("saveBtn"); b.disabled=true; $("saveNote").textContent="Making your card…";
+  try{
+    const blob=await makeCard(); const name=`group-chat-role-${roleKey}.png`;
+    const file=new File([blob],name,{type:"image/png"});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file],title:"My group chat role"}); $("saveNote").textContent="Tap Save Image, then post it to your story."; }
+      catch(e){ $("saveNote").textContent = e.name==="AbortError" ? "Sized for your story." : "Couldn't open sharing. Try again, or screenshot the card." }
+    } else {
+      const u=URL.createObjectURL(blob), a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(u),4000); $("saveNote").textContent="Saved. Check your downloads.";
+    }
+  }catch(e){ $("saveNote").textContent="Couldn't make the image. Screenshot the card instead." }
+  b.disabled=false;
+};
+
+function start(){ ans=new Array(Q.length).fill(null); i=0; try{history.replaceState(null,"",location.pathname)}catch(e){} view("quiz"); renderQ() }
+$("startBtn").onclick=start;
+$("retakeBtn").onclick=start;
+$("backBtn").onclick=()=>{ if(i>0){i--; renderQ()} };
+
+const [hk, hp] = (location.hash||"").slice(1).split("-");
+if(PALS.some(p=>p[0]===hp)) pal=hp;
+setPal(pal);
+if(T[hk]) show(hk, null, false);
+</script>
+
+</body>
+</html>
